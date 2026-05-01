@@ -18,7 +18,6 @@ An advanced, interactive, and bilingual (Sinhala & English) web application buil
 
 ## 📸 Screenshots
 
-*(Add your screenshots here! Replace the placeholder links with actual image links after you upload them to your repo)*
 
 | Upload Interface | Disease Analysis & Heatmap |
 | :---: | :---: |
@@ -37,8 +36,8 @@ Follow these steps to run the application on your own machine.
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/YourUsername/Your-Repo-Name.git](https://github.com/YourUsername/Your-Repo-Name.git)
-cd Kavi-Cs
+git clone https://github.com/Kavi-Cs/crop-disease-ai.git
+cd crop-disease-ai
 
 pip install streamlit tensorflow opencv-python-headless pillow numpy
 
@@ -49,3 +48,7 @@ streamlit run app.py
 ├── bg_video.mp4                     # Background video 
 ├── requirements.txt                 # Python dependencies
 └── README.md                        # Project documentation
+
+
+👨‍💻 Developer
+Developed by Kaveesha Induwara
