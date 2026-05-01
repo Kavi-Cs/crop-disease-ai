@@ -38,4 +38,14 @@ Follow these steps to run the application on your own machine.
 ### 1. Clone the Repository
 ```bash
 git clone [https://github.com/YourUsername/Your-Repo-Name.git](https://github.com/YourUsername/Your-Repo-Name.git)
-cd Your-Repo-Name
+cd Kavi-Cs
+
+pip install streamlit tensorflow opencv-python-headless pillow numpy
+
+streamlit run app.py
+
+├── app.py                           # Main Streamlit application file
+├── super_crop_disease_model.keras   # Trained Deep Learning model (Add this!)
+├── bg_video.mp4                     # Background video (Add this!)
+├── requirements.txt                 # Python dependencies
+└── README.md                        # Project documentation
