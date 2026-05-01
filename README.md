@@ -22,7 +22,6 @@ An advanced, interactive, and bilingual (Sinhala & English) web application buil
 | Upload Interface | Disease Analysis & Heatmap |
 | :---: | :---: |
 | <img src="UserInterface.png" width="400"> | <img src="sample.png" width="400"> |
-Crop Disease Tracker v3.3 - Personal - Microsoft​ Edge 2026-05-02 01-53-23.mp4
 
 ## 🛠️ Technology Stack
 
