@@ -44,8 +44,8 @@ pip install streamlit tensorflow opencv-python-headless pillow numpy
 
 streamlit run app.py
 
-├── app.py                           # Main Streamlit application file
-├── super_crop_disease_model.keras   # Trained Deep Learning model (Add this!)
-├── bg_video.mp4                     # Background video (Add this!)
+├── app_V2.py                        # Main Streamlit application file
+├── super_crop_disease_model.keras   # Trained Deep Learning model
+├── bg_video.mp4                     # Background video 
 ├── requirements.txt                 # Python dependencies
 └── README.md                        # Project documentation
