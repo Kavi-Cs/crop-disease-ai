@@ -4,28 +4,22 @@ from PIL import Image
 import numpy as np
 import base64
 
-# වෙබ් පිටුවේ සැකසුම්
 st.set_page_config(page_title="Crop Disease Tracker", page_icon="🌱", layout="centered")
 
-# --- 🚀 විශේෂ විසඳුම: Error එක මඟහැරීම සඳහා Custom Layer එකක් සෑදීම ---
 class SafeDense(tf.keras.layers.Dense):
     def __init__(self, **kwargs):
-        # කරදරකාරී 'quantization_config' කොටස කේතයෙන් ඉවත් කිරීම
         kwargs.pop('quantization_config', None)
         super().__init__(**kwargs)
 
-# --- පසුබිම් පින්තූරය සැකසීම ---
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
 try:
-    # ඔබේ තේ වත්තේ පින්තූරය මෙතනට සම්බන්ධ වේ
     image_base64 = get_base64_image("istockphoto-470248962-612x612.jpg")
     
     st.markdown(f"""
         <style>
-        /* මුළු පිටුවේම පසුබිම */
         [data-testid="stAppViewContainer"] {{
             background-image: url("data:image/jpg;base64,{image_base64}");
             background-size: cover;
@@ -39,7 +33,6 @@ try:
             z-index: -1;
         }}
 
-        /* Sidebar එක සහ භාෂාව තෝරන කොටස ලස්සන කිරීම */
         [data-testid="stSidebar"] {{
             background-color: rgba(10, 30, 10, 0.9) !important;
             border-right: 2px solid #4CAF50;
@@ -54,7 +47,6 @@ try:
             display: block;
         }}
 
-        /* මාතෘකා සහ Frames */
         .main-title {{
             text-align: center;
             color: #4CAF50;
@@ -79,11 +71,9 @@ try:
 except FileNotFoundError:
     st.error("පසුබිම් පින්තූරය සොයාගත නොහැක.")
 
-# --- Sidebar එකේ භාෂාව තෝරන්න ---
 st.sidebar.markdown('<span class="sidebar-label">🌐 භාෂාව තෝරන්න <br> Select Language</span>', unsafe_allow_html=True)
 language = st.sidebar.selectbox("", ["සිංහල", "English"], label_visibility="collapsed")
 
-# UI භාෂා සැකසුම
 ui_text = {
     "සිංහල": {
         "title": "🌱 කෘෂිකාර්මික බෝග රෝග හඳුනාගැනීම",
@@ -107,7 +97,6 @@ ui_text = {
 
 t = ui_text[language]
 
-# Banner පින්තූරය
 try:
     st.image("support-us-banner-2-877x470.jpg", use_container_width=True)
 except:
@@ -116,11 +105,9 @@ except:
 st.markdown(f"<h1 class='main-title'>{t['title']}</h1>", unsafe_allow_html=True)
 st.markdown(f"<p style='text-align:center; color:white; font-size:1.5rem;'>{t['msg']}</p>", unsafe_allow_html=True)
 
-# 🚀 Model එක Load කිරීම (Error එක හදපු විදිහ)
 @st.cache_resource
 def load_model():
     try:
-        # custom_objects හරහා අපි හදපු SafeDense එක දෙනවා
         model = tf.keras.models.load_model(
             'super_crop_disease_model.keras', 
             compile=False,
@@ -132,7 +119,6 @@ def load_model():
 
 model = load_model()
 
-# රෝග ප්‍රතිකාර
 treatments = {
     'Tomato_Late_blight': {
         "සිංහල": "මෙටලැක්සිල් (Metalaxyl) අඩංගු දිලීර නාශකයක් වහාම යොදන්න.",
@@ -147,7 +133,6 @@ treatments = {
 if isinstance(model, str):
     st.error(f"🚨 Error loading model: {model}")
 else:
-    # පින්තූරය Upload කිරීම
     up_file = st.file_uploader(t["btn"], type=["jpg", "png", "jpeg"])
 
     if up_file:
@@ -155,7 +140,6 @@ else:
         st.image(img, caption=t["msg"], use_container_width=True)
         
         with st.spinner(t["analyzing"]):
-            # AI සැකසුම්
             processed_img = img.convert('RGB').resize((224, 224))
             img_arr = tf.keras.preprocessing.image.img_to_array(processed_img) / 255.0
             img_arr = np.expand_dims(img_arr, axis=0)
@@ -167,7 +151,6 @@ else:
             class_names = ['Tomato_Late_blight', 'Tomato_healthy']
             res = class_names[idx]
 
-        # ප්‍රතිඵල පෙන්වීම
         st.markdown(f"""
             <div class='prediction-box'>
                 <p class='large-text'>🟢 {t['result']}: <span style="color: #90EE90;">{res}</span></p>
